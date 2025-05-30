@@ -10,35 +10,38 @@ const Shop = () => {
   const products = [
     {
       id: 'ceremonial-matcha',
-      name: 'Ceremonial-Grade Matcha',
+      name: 'Okami Ceremonial Matcha',
       description: 'Premium stone-ground matcha from Uji, Kyoto',
-      price: 2499,
+      price: 1499,
       image: '🍃',
       category: 'matcha',
       inStock: true,
       weight: '30g',
+      badge: 'Best Seller',
       features: ['Ceremonial Grade', 'Stone Ground', 'Single Origin', 'Zero Additives']
     },
     {
       id: 'starter-kit',
-      name: 'Traditional Starter Kit',
+      name: 'Okami Matcha Starter Kit',
       description: 'Everything you need to begin your matcha ritual',
-      price: 3999,
+      price: 2799,
       image: '🎋',
       category: 'kit',
       inStock: true,
+      badge: 'Complete Set',
       includes: ['30g Ceremonial Matcha', 'Bamboo Whisk (Chasen)', 'Bamboo Scoop (Chashaku)', 'Preparation Guide']
     },
     {
-      id: 'matcha-latte',
-      name: 'Matcha Latte Blend',
-      description: 'Smooth blend perfect for lattes and smoothies',
-      price: 1999,
+      id: 'culinary-matcha',
+      name: 'Okami Culinary Matcha',
+      description: 'Perfect blend for lattes, smoothies and recipes',
+      price: 899,
       image: '🥛',
       category: 'matcha',
-      inStock: false,
-      weight: '50g',
-      comingSoon: true
+      inStock: true,
+      weight: '100g',
+      badge: 'New',
+      comingSoon: false
     }
   ];
 
@@ -46,13 +49,6 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="container mx-auto px-6 py-4">
-          <Link to="/" className="text-2xl font-bold text-emerald-600">Okami Matcha</Link>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="py-16 bg-emerald-50">
         <div className="container mx-auto px-6 text-center">
@@ -104,10 +100,17 @@ const Shop = () => {
           {/* Products Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+              <div key={product.id} className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative">
+                {/* Badge */}
+                {product.badge && (
+                  <div className="absolute top-4 right-4 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold z-10">
+                    {product.badge}
+                  </div>
+                )}
+
                 <Link to={`/product/${product.id}`}>
                   <div className="p-8 text-center">
-                    <div className="text-6xl mb-6">{product.image}</div>
+                    <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">{product.image}</div>
                     <h3 className="text-2xl font-bold text-slate-800 mb-2">{product.name}</h3>
                     <p className="text-slate-600 mb-4">{product.description}</p>
                     {product.weight && (
